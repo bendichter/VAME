@@ -53,7 +53,7 @@ def init_new_project(
     d = str(month[0:3]+str(day))
     date = dt.today().strftime('%Y-%m-%d')
 
-    if working_directory == None:
+    if working_directory is None:
         working_directory = '.'
 
     wd = Path(working_directory).resolve()

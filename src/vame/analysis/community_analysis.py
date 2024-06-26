@@ -343,8 +343,8 @@ def create_cohort_community_bag(
     # nx.write_gpickle(T, 'T.gpickle')
     trees.append(T)
 
-    if cut_tree != None:
-        community_bag =  traverse_tree_cutline(T,cutline=cut_tree)
+    if cut_tree is not None:
+        community_bag = traverse_tree_cutline(T,cutline=cut_tree)
         communities_all = community_bag
         draw_tree(T)
     else:
@@ -353,7 +353,7 @@ def create_cohort_community_bag(
         flag_1 = 'no'
         while flag_1 == 'no':
             cutline = int(input("Where do you want to cut the Tree? 0/1/2/3/..."))
-            community_bag =  traverse_tree_cutline(T,cutline=cutline)
+            community_bag = traverse_tree_cutline(T, cutline=cutline)
             logger.info(community_bag)
             flag_2 = input('\nAre all motifs in the list? (yes/no/restart)')
             if flag_2 == 'no':
@@ -371,7 +371,7 @@ def create_cohort_community_bag(
             if flag_2 == "restart":
                 continue
             if flag_2 == 'yes':
-                communities_all=community_bag
+                communities_all = community_bag
                 flag_1 = 'yes'
     return communities_all, trees
 
