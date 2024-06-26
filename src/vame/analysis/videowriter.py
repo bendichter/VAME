@@ -11,14 +11,15 @@ Licensed under GNU General Public License v3.0
 
 import os
 from pathlib import Path
-import numpy as np
-import cv2 as cv
-import tqdm
 from typing import Union
-from vame.util.auxiliary import read_config
-import imageio
-from vame.logging.logger import VameLogger, TqdmToLogger
 
+import cv2 as cv
+import imageio
+import numpy as np
+import tqdm
+
+from ..logging.logger import VameLogger, TqdmToLogger
+from ..util.auxiliary import read_config
 
 logger_config = VameLogger(__name__)
 logger = logger_config.logger

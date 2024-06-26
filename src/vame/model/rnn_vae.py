@@ -18,11 +18,11 @@ import os
 import numpy as np
 from pathlib import Path
 from typing import Tuple
-from vame.util.auxiliary import read_config
-from vame.model.dataloader import SEQUENCE_DATASET
-from vame.model.rnn_model import RNN_VAE
+from ..util.auxiliary import read_config
+from .dataloader import SEQUENCE_DATASET
+from .rnn_model import RNN_VAE
 from tqdm import tqdm
-from vame.logging.logger import VameLogger, TqdmToLogger
+from ..logging.logger import VameLogger, TqdmToLogger
 
 logger_config = VameLogger(__name__)
 logger = logger_config.logger

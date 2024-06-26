@@ -8,16 +8,16 @@ Licensed under GNU General Public License v3.0
 """
 
 import os
-
-import torch
-import numpy as np
 from pathlib import Path
+
 import matplotlib.pyplot as plt
+import numpy as np
+import torch
 from sklearn.mixture import GaussianMixture
 
-from vame.util.auxiliary import read_config
-from vame.model.rnn_model import RNN_VAE
-from vame.logging.logger import VameLogger
+from ..logging.logger import VameLogger
+from ..model.rnn_model import RNN_VAE
+from ..util.auxiliary import read_config
 
 logger_config = VameLogger(__name__)
 logger = logger_config.logger

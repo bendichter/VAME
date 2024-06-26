@@ -19,11 +19,12 @@ Licensed under GNU Lesser General Public License v3.0
 """
 
 import os
-from pathlib import Path
 import shutil
 from datetime import datetime as dt
-from vame.util import auxiliary
+from pathlib import Path
 from typing import List
+
+from ..util import auxiliary
 
 
 def init_new_project(
@@ -189,9 +190,9 @@ def init_new_project(
     cfg_file['parametrization'] = 'hmm'
     cfg_file['hmm_trained'] = False
 
-    projconfigfile=os.path.join(str(project_path),'config.yaml')
+    projconfigfile=os.path.join(str(project_path), 'config.yaml')
     # Write dictionary to yaml  config file
-    auxiliary.write_config(projconfigfile,cfg_file)
+    auxiliary.write_config(projconfigfile, cfg_file)
 
     print('A VAME project has been created. \n')
     print('Now its time to prepare your data for VAME. '

@@ -19,6 +19,7 @@ from torch import nn
 # NEW MODEL WITH SMALL ALTERATIONS
 """ MODEL  """
 
+
 class Encoder(nn.Module):
     """Encoder module of the Variational Autoencoder."""
     def __init__(self, NUM_FEATURES: int, hidden_size_layer_1: int, hidden_size_layer_2: int, dropout_encoder: float):
@@ -36,13 +37,12 @@ class Encoder(nn.Module):
         self.input_size = NUM_FEATURES
         self.hidden_size = hidden_size_layer_1
         self.hidden_size_2 = hidden_size_layer_2
-        self.n_layers  = 2
-        self.dropout   = dropout_encoder
+        self.n_layers = 2
+        self.dropout = dropout_encoder
         self.bidirectional = True
 
         self.encoder_rnn = nn.GRU(input_size=self.input_size, hidden_size=self.hidden_size, num_layers=self.n_layers,
                             bias=True, batch_first=True, dropout=self.dropout, bidirectional=self.bidirectional)#UNRELEASED!
-
 
         self.hidden_factor = (2 if self.bidirectional else 1) * self.n_layers
 
@@ -131,8 +131,8 @@ class Decoder(nn.Module):
         self.sequence_length = TEMPORAL_WINDOW
         self.hidden_size = hidden_size_rec
         self.latent_length = ZDIMS
-        self.n_layers  = 1
-        self.dropout   = dropout_rec
+        self.n_layers = 1
+        self.dropout = dropout_rec
         self.bidirectional = True
 
         self.rnn_rec = nn.GRU(self.latent_length, hidden_size=self.hidden_size, num_layers=self.n_layers,
@@ -195,8 +195,8 @@ class Decoder_Future(nn.Module):
         self.sequence_length = TEMPORAL_WINDOW
         self.hidden_size = hidden_size_pred
         self.latent_length = ZDIMS
-        self.n_layers  = 1
-        self.dropout   = dropout_pred
+        self.n_layers = 1
+        self.dropout = dropout_pred
         self.bidirectional = True
 
         self.rnn_pred = nn.GRU(self.latent_length, hidden_size=self.hidden_size, num_layers=self.n_layers,
@@ -314,4 +314,3 @@ class RNN_VAE(nn.Module):
             return prediction, future, z, mu, logvar
         else:
             return prediction, z, mu, logvar
-

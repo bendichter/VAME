@@ -10,14 +10,15 @@ Licensed under GNU General Public License v3.0
 """
 
 import os
-import umap
-import numpy as np
 from pathlib import Path
-import matplotlib.pyplot as plt
 from typing import Optional, Union
-from vame.util.auxiliary import read_config
-from vame.logging.logger import VameLogger
 
+import matplotlib.pyplot as plt
+import numpy as np
+import umap
+
+from ..logging.logger import VameLogger
+from ..util.auxiliary import read_config
 
 logger_config = VameLogger(__name__)
 logger = logger_config.logger
@@ -188,14 +189,3 @@ def visualization(
         raise e
     finally:
         logger_config.remove_file_handler()
-
-
-
-
-
-
-
-
-
-
-

@@ -9,21 +9,21 @@ https://github.com/LINCellularNeuroscience/VAME
 Licensed under GNU General Public License v3.0
 """
 import sys
+
+from .analysis import community
+from .analysis import community_videos
+from .analysis import generative_model
+from .analysis import gif
+from .analysis import motif_videos
+from .analysis import pose_segmentation
+from .analysis import visualization
+from .initialize_project import init_new_project
+from .model import create_trainset
+from .model import evaluate_model
+from .model import train_model
+from .util import auxiliary
+from .util.align_egocentrical import egocentric_alignment
+from .util.auxiliary import update_config
+from .util.csv_to_npy import csv_to_numpy
+
 sys.dont_write_bytecode = True
-
-from vame.initialize_project import init_new_project
-from vame.model import create_trainset
-from vame.model import train_model
-from vame.model import evaluate_model
-from vame.analysis import pose_segmentation
-from vame.analysis import motif_videos
-from vame.analysis import community
-from vame.analysis import community_videos
-from vame.analysis import visualization
-from vame.analysis import generative_model
-from vame.analysis import gif
-from vame.util.csv_to_npy import csv_to_numpy
-from vame.util.align_egocentrical import egocentric_alignment
-from vame.util import auxiliary
-from vame.util.auxiliary import update_config
-

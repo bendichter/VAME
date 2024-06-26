@@ -8,15 +8,16 @@ Licensed under GNU General Public License v3.0
 """
 
 import os
+from pathlib import Path
+from typing import Tuple, List
+
 import cv2 as cv
 import numpy as np
 import pandas as pd
 import tqdm
-from typing import Tuple, List
-from vame.logging.logger import VameLogger, TqdmToLogger
-from pathlib import Path
-from vame.util.auxiliary import read_config
 
+from ..logging.logger import VameLogger, TqdmToLogger
+from ..util.auxiliary import read_config
 
 logger_config = VameLogger(__name__)
 logger = logger_config.logger

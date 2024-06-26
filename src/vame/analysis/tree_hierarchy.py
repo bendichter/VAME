@@ -10,11 +10,12 @@ Licensed under GNU General Public License v3.0
 """
 
 
-import numpy as np
-import networkx as nx
 import random
-from matplotlib import pyplot as plt
 from typing import Dict, List, Tuple
+
+import networkx as nx
+import numpy as np
+from matplotlib import pyplot as plt
 
 
 def hierarchy_pos(

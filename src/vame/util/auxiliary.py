@@ -18,10 +18,12 @@ https://github.com/AlexEMG/DeepLabCut/blob/master/AUTHORS
 Licensed under GNU Lesser General Public License v3.0
 """
 
-import os, yaml
+import os
+import yaml
 from pathlib import Path
-import ruamel.yaml
 from typing import Tuple
+
+import ruamel.yaml
 
 
 def create_config_template() -> Tuple[dict, ruamel.yaml.YAML]:

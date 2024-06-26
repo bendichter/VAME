@@ -12,17 +12,18 @@ Updated 5/11/2022 with PH edits
 """
 
 import os
-import umap
-import scipy
 import pickle
-import numpy as np
 from pathlib import Path
-import matplotlib.pyplot as plt
-from vame.util.auxiliary import read_config
-from vame.analysis.tree_hierarchy import graph_to_tree, draw_tree, traverse_tree_cutline
 from typing import List, Tuple
-from vame.logging.logger import VameLogger
 
+import matplotlib.pyplot as plt
+import numpy as np
+import scipy
+import umap
+
+from .tree_hierarchy import graph_to_tree, draw_tree, traverse_tree_cutline
+from ..logging.logger import VameLogger
+from ..util.auxiliary import read_config
 
 logger_config = VameLogger(__name__)
 logger = logger_config.logger
@@ -131,15 +132,15 @@ def find_zero_labels(motif_usage: Tuple[np.ndarray, np.ndarray], n_cluster: int)
         if len(usage_list) < n_cluster:
             usage_list.insert(n_cluster,0)
 
-    elif len(cons[0]) != n_cluster: #if missing motif is at the front or end of list
+    elif len(cons[0]) != n_cluster:  # if missing motif is at the front or end of list
         # diff = n_cluster - cons[0][-1]
         usage_list = list(motif_usage[1])
-        if cons[0][0] != 0: #missing motif at front of list
+        if cons[0][0] != 0:  # missing motif at front of list
             usage_list.insert(0,0)
-        else: #missing motif at end of list
+        else:  # missing motif at end of list
             usage_list.insert(n_cluster-1,0)
 
-    if len(usage_list) < n_cluster: #if there's more than one motif missing
+    if len(usage_list) < n_cluster:  # if there's more than one motif missing
         for k in range(len(usage_list), n_cluster):
             usage_list.insert(k,0)
 
@@ -172,6 +173,7 @@ def augment_motif_timeseries(label: np.ndarray, n_cluster: int) -> Tuple[np.ndar
 
     return augmented_label, zero_motifs
 
+
 def get_labels(cfg: dict, files: List[str], model_name: str, n_cluster: int, parametrization: str) -> List[np.ndarray]:
     """Get cluster labels for given videos files.
 
@@ -202,6 +204,7 @@ def get_labels(cfg: dict, files: List[str], model_name: str, n_cluster: int, par
         augmented_label,zero_motifs = augment_motif_timeseries(label, n_cluster)
         labels.append(augmented_label)
     return labels
+
 
 def get_community_label(cfg: dict, files: List[str], model_name: str, n_cluster: int, parametrization: str) -> np.ndarray:
     """Get community labels for given files.
@@ -251,6 +254,7 @@ def compute_transition_matrices(files: List[str], labels: List[np.ndarray], n_cl
         transition_matrices.append(trans)
     return transition_matrices
 
+
 def create_community_bag(
     files: List[str],
     labels: List[np.ndarray],
@@ -276,8 +280,8 @@ def create_community_bag(
         T = graph_to_tree(usage, transition_matrices[i], n_cluster, merge_sel=1)
         trees.append(T)
 
-        if cut_tree != None:
-            community_bag =  traverse_tree_cutline(T,cutline=cut_tree)
+        if cut_tree is not None:
+            community_bag = traverse_tree_cutline(T,cutline=cut_tree)
             communities_all.append(community_bag)
             draw_tree(T)
         else:
@@ -308,6 +312,7 @@ def create_community_bag(
                     flag_1 = 'yes'
 
     return communities_all, trees
+
 
 def create_cohort_community_bag(
     files: List[str],
@@ -370,6 +375,7 @@ def create_cohort_community_bag(
                 flag_1 = 'yes'
     return communities_all, trees
 
+
 def get_community_labels(files: List[str], labels: List[np.ndarray], communities_all: List[List[List[int]]]) -> List[np.ndarray]:
     """Transform kmeans parameterized latent vector into communities. Get community labels for given files and community bags.
 
@@ -396,6 +402,7 @@ def get_community_labels(files: List[str], labels: List[np.ndarray], communities
         community_labels_all.append(community_labels)
 
     return community_labels_all
+
 
 def get_cohort_community_labels(
     files: List[str],
@@ -600,8 +607,3 @@ def community(
         raise e
     finally:
         logger_config.remove_file_handler()
-
-
-
-
-

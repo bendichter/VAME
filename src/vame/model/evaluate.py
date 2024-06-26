@@ -17,14 +17,13 @@ from matplotlib import pyplot as plt
 import torch.utils.data as Data
 from typing import Optional
 
-from vame.util.auxiliary import read_config
-from vame.model.rnn_vae import RNN_VAE
-from vame.model.dataloader import SEQUENCE_DATASET
-from vame.logging.logger import VameLogger
+from ..util.auxiliary import read_config
+from .rnn_vae import RNN_VAE
+from .dataloader import SEQUENCE_DATASET
+from ..logging.logger import VameLogger
 
 logger_config = VameLogger(__name__)
 logger = logger_config.logger
-
 
 
 use_gpu = torch.cuda.is_available()
@@ -181,7 +180,6 @@ def eval_temporal(
     softplus = cfg['softplus']
 
     filepath = os.path.join(cfg['project_path'],"model")
-
 
     seq_len_half = int(TEMPORAL_WINDOW/2)
     if use_gpu:

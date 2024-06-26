@@ -10,13 +10,14 @@ Licensed under GNU General Public License v3.0
 """
 
 import os
-import h5py
-import tqdm
-import scipy
+
 import cv2 as cv
 import numpy as np
 import pandas as pd
-from vame.logging.logger import VameLogger
+import scipy
+import tqdm
+
+from ..logging.logger import VameLogger
 
 logger_config = VameLogger(__name__)
 logger = logger_config.logger

@@ -10,15 +10,16 @@ Licensed under GNU General Public License v3.0
 """
 
 import os
-import numpy as np
 from pathlib import Path
+from typing import List, Optional, Tuple
+
+import matplotlib.pyplot as plt
+import numpy as np
 import scipy.signal
 from scipy.stats import iqr
-import matplotlib.pyplot as plt
-from typing import List, Optional, Tuple
-from vame.logging.logger import VameLogger
-from vame.util.auxiliary import read_config
 
+from ..logging.logger import VameLogger
+from ..util.auxiliary import read_config
 
 logger_config = VameLogger(__name__)
 logger = logger_config.logger
@@ -38,6 +39,7 @@ def nan_helper(y: np.ndarray) -> Tuple:
     """
     return np.isnan(y), lambda z: z.nonzero()[0]
 
+
 def interpol(arr: np.ndarray) -> np.ndarray:
     """
     Interpolates all NaN values in the given array.
@@ -53,6 +55,7 @@ def interpol(arr: np.ndarray) -> np.ndarray:
     y[nans]= np.interp(x(nans), x(~nans), y[~nans])
     arr = np.transpose(y)
     return arr
+
 
 def plot_check_parameter(
     cfg: dict,
@@ -118,7 +121,6 @@ def plot_check_parameter(
         # plot_X_orig = np.delete(plot_X_orig, anchor_2, 1)
         # mse = (np.square(plot_X_orig[rnd:rnd+1000, :] - plot_X_med[:,rnd:rnd+1000].T)).mean(axis=0)
 
-
     else:
         plt.figure()
         plt.plot(plot_X_med.T)
@@ -135,6 +137,7 @@ def plot_check_parameter(
         plt.legend()
 
     logger.info("Please run the function with check_parameter=False if you are happy with the results")
+
 
 def traindata_aligned(
     cfg: dict,

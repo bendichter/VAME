@@ -10,14 +10,14 @@ Licensed under GNU General Public License v3.0
 """
 
 import os
+from pathlib import Path
+from typing import Tuple
+
 import numpy as np
 import pandas as pd
 
-from pathlib import Path
-from vame.util.auxiliary import read_config
-from typing import Tuple
-from vame.logging.logger import VameLogger
-
+from ..logging.logger import VameLogger
+from ..util.auxiliary import read_config
 
 logger_config = VameLogger(__name__)
 logger = logger_config.logger
@@ -122,4 +122,3 @@ def csv_to_numpy(config: str, save_logs=False) -> None:
     except Exception as e:
         logger.exception(f"{e}")
         raise e
-

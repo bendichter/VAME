@@ -10,19 +10,19 @@ Licensed under GNU General Public License v3.0
 """
 
 import os
-import tqdm
-import torch
 import pickle
-import numpy as np
 from pathlib import Path
 from typing import List, Tuple
 
+import numpy as np
+import torch
+import tqdm
 from hmmlearn import hmm
 from sklearn.cluster import KMeans
-from vame.logging.logger import VameLogger, TqdmToLogger
-from vame.util.auxiliary import read_config
-from vame.model.rnn_model import RNN_VAE
 
+from ..logging.logger import VameLogger, TqdmToLogger
+from ..model.rnn_model import RNN_VAE
+from ..util.auxiliary import read_config
 
 logger_config = VameLogger(__name__)
 logger = logger_config.logger
@@ -400,4 +400,3 @@ def pose_segmentation(config: str, save_logs: bool = False) -> None:
         logger.exception(f"An error occurred during pose segmentation: {e}")
     finally:
         logger_config.remove_file_handler()
-

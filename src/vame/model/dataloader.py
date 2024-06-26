@@ -9,11 +9,13 @@ https://github.com/LINCellularNeuroscience/VAME
 Licensed under GNU General Public License v3.0
 """
 
+import os
+
+import numpy as np
 import torch
 from torch.utils.data.dataset import Dataset
-import numpy as np
-import os
-from vame.logging.logger import VameLogger
+
+from ..logging.logger import VameLogger
 
 
 class SEQUENCE_DATASET(Dataset):
@@ -35,7 +37,7 @@ class SEQUENCE_DATASET(Dataset):
         self.temporal_window = temporal_window
         self.X = np.load(path_to_file+data)
         if self.X.shape[0] > self.X.shape[1]:
-            self.X=self.X.T
+            self.X = self.X.T
 
         self.data_points = len(self.X[0,:])
 
@@ -50,9 +52,9 @@ class SEQUENCE_DATASET(Dataset):
             self.std = np.load(path_to_file+'seq_std.npy')
 
         if train:
-            self.logger.info('Initialize train data. Datapoints %d' %self.data_points)
+            self.logger.info('Initialize train data. Datapoints %d' % self.data_points)
         else:
-            self.logger.info('Initialize test data. Datapoints %d' %self.data_points)
+            self.logger.info('Initialize test data. Datapoints %d' % self.data_points)
 
     def __len__(self) -> int:
         """Return the number of data points.
@@ -78,7 +80,7 @@ class SEQUENCE_DATASET(Dataset):
         start = np.random.choice(nf-temp_window)
         end = start+temp_window
 
-        sequence = self.X[:,start:end]
+        sequence = self.X[:, start:end]
 
         sequence = (sequence-self.mean)/self.std
 

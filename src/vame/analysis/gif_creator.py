@@ -10,19 +10,19 @@ Licensed under GNU General Public License v3.0
 """
 
 import os
+from pathlib import Path
+from typing import List, Tuple
+
+import matplotlib
+import numpy as np
 import tqdm
 import umap
-import numpy as np
-from pathlib import Path
-import matplotlib
 from matplotlib import pyplot as plt
 from matplotlib.gridspec import GridSpec
-from vame.util.auxiliary import read_config
-from vame.util.gif_pose_helper import get_animal_frames
-from typing import List, Tuple
-from vame.logging.logger import VameLogger
 
-
+from ..logging.logger import VameLogger
+from ..util.auxiliary import read_config
+from ..util.gif_pose_helper import get_animal_frames
 
 logger_config = VameLogger(__name__)
 logger = logger_config.logger
@@ -182,30 +182,3 @@ def gif(
 
         frames = get_animal_frames(cfg, file, pose_ref_index, start, length, subtract_background, file_format, crop_size)
         create_video(path_to_file, file, embed, umap_label, frames, start, length, max_lag, num_points)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
