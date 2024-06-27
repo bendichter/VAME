@@ -23,7 +23,6 @@ from .model import evaluate_model
 from .model import train_model
 from .util import auxiliary
 from .util.align_egocentrical import egocentric_alignment
-from .util.auxiliary import update_config
 from .util.csv_to_npy import csv_to_numpy
 
 sys.dont_write_bytecode = True

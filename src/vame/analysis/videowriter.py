@@ -20,6 +20,8 @@ import tqdm
 
 from ..logging.logger import VameLogger, TqdmToLogger
 from ..util.auxiliary import read_config
+from ..schemas.states import MotifVideosFunctionSchema, CommunityVideosFunctionSchema, save_state
+
 
 logger_config = VameLogger(__name__)
 logger = logger_config.logger
@@ -107,7 +109,7 @@ def get_cluster_vid(
             video_writer.close()
     capture.release()
 
-
+@save_state(model=MotifVideosFunctionSchema)
 def motif_videos(
     config: Union[str, Path],
     videoType: str = '.mp4',
@@ -167,7 +169,6 @@ def motif_videos(
                 os.mkdir(os.path.join(path_to_file,"cluster_videos"))
 
             get_cluster_vid(cfg, path_to_file, file, n_cluster, videoType, flag, output_video_type=output_video_type, tqdm_logger_stream=tqdm_logger_stream)
-
         logger.info("All videos have been created!")
     except Exception as e:
         logger.exception(f"Error in motif_videos: {e}")
@@ -175,6 +176,8 @@ def motif_videos(
     finally:
         logger_config.remove_file_handler()
 
+
+@save_state(model=CommunityVideosFunctionSchema)
 def community_videos(config: Union[str, Path], videoType: str = '.mp4', save_logs: bool = False) -> None:
     """
     Generate community videos.

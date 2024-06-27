@@ -22,6 +22,8 @@ from .dataloader import SEQUENCE_DATASET
 from .rnn_vae import RNN_VAE
 from ..logging.logger import VameLogger
 from ..util.auxiliary import read_config
+from ..schemas.states import EvaluateModelFunctionSchema, save_state
+
 
 logger_config = VameLogger(__name__)
 logger = logger_config.logger
@@ -170,7 +172,6 @@ def eval_temporal(
     if not fixed:
         NUM_FEATURES = NUM_FEATURES - 2
     TEST_BATCH_SIZE = 64
-    PROJECT_PATH = cfg['project_path']
     hidden_size_layer_1 = cfg['hidden_size_layer_1']
     hidden_size_layer_2 = cfg['hidden_size_layer_2']
     hidden_size_rec = cfg['hidden_size_rec']
@@ -218,7 +219,7 @@ def eval_temporal(
         plot_loss(cfg, filepath, model_name)
         # pass #note, loading of losses needs to be adapted for CPU use #TODO
 
-
+@save_state(model=EvaluateModelFunctionSchema)
 def evaluate_model(config: str, use_snapshots: bool = False, save_logs: bool = False) -> None:
     """Evaluate the trained model.
 

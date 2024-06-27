@@ -18,6 +18,8 @@ import pandas as pd
 
 from ..logging.logger import VameLogger
 from ..util.auxiliary import read_config
+from ..schemas.states import CsvToNumpyFunctionSchema, save_state
+
 
 logger_config = VameLogger(__name__)
 logger = logger_config.logger
@@ -60,6 +62,8 @@ def interpol(arr: np.ndarray) -> np.ndarray:
 
     return arr
 
+
+@save_state(model=CsvToNumpyFunctionSchema)
 def csv_to_numpy(config: str, save_logs=False) -> None:
     """Converts a pose-estimation.csv file to a numpy array. Note that this code is only useful for data which is a priori egocentric, i.e. head-fixed
     or otherwise restrained animals.
@@ -122,3 +126,5 @@ def csv_to_numpy(config: str, save_logs=False) -> None:
     except Exception as e:
         logger.exception(f"{e}")
         raise e
+    finally:
+        logger_config.remove_file_handler()

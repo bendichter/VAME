@@ -18,6 +18,7 @@ import numpy as np
 import scipy.signal
 from scipy.stats import iqr
 
+from ..schemas.states import CreateTrainsetFunctionSchema, save_state
 from ..logging.logger import VameLogger
 from ..util.auxiliary import read_config
 
@@ -372,6 +373,7 @@ def traindata_fixed(
         logger.info('Lenght of test data: %d' %len(z_test.T))
 
 
+@save_state(model=CreateTrainsetFunctionSchema)
 def create_trainset(
     config: str,
     pose_ref_index: Optional[List] = None,

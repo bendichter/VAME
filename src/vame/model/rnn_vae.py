@@ -9,6 +9,7 @@ https://github.com/LINCellularNeuroscience/VAME
 Licensed under GNU General Public License v3.0
 """
 
+from tqdm import tqdm
 import torch
 from torch import nn
 import torch.utils.data as Data
@@ -21,8 +22,9 @@ from typing import Tuple
 from ..util.auxiliary import read_config
 from .dataloader import SEQUENCE_DATASET
 from .rnn_model import RNN_VAE
-from tqdm import tqdm
 from ..logging.logger import VameLogger, TqdmToLogger
+from ..schemas.states import TrainModelFunctionSchema, save_state
+
 
 logger_config = VameLogger(__name__)
 logger = logger_config.logger
@@ -354,6 +356,7 @@ def test(
     return mse_loss /idx, test_loss/idx, kl_weight*kmeans_losses
 
 
+@save_state(model=TrainModelFunctionSchema)
 def train_model(config: str, save_logs: bool = False) -> None:
     """Train Variational Autoencoder using the configuration file values.
 

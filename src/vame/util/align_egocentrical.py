@@ -18,6 +18,8 @@ import tqdm
 
 from ..logging.logger import VameLogger, TqdmToLogger
 from ..util.auxiliary import read_config
+from ..schemas.states import EgocentricAlignmentFunctionSchema, save_state
+
 
 logger_config = VameLogger(__name__)
 logger = logger_config.logger
@@ -457,6 +459,7 @@ def alignment(
     return time_series, frames
 
 
+@save_state(model=EgocentricAlignmentFunctionSchema)
 def egocentric_alignment(
     config: str,
     pose_ref_index: list = [5,6],
@@ -530,3 +533,5 @@ def egocentric_alignment(
     except Exception as e:
         logger.exception(f"{e}")
         raise e
+    finally:
+        logger_config.remove_file_handler()

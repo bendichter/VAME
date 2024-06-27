@@ -18,6 +18,7 @@ from sklearn.mixture import GaussianMixture
 from ..logging.logger import VameLogger
 from ..model.rnn_model import RNN_VAE
 from ..util.auxiliary import read_config
+from ..schemas.states import GenerativeModelFunctionSchema, save_state
 
 logger_config = VameLogger(__name__)
 logger = logger_config.logger
@@ -231,7 +232,7 @@ def load_model(cfg: dict, model_name: str) -> torch.nn.Module:
 
     return model
 
-
+@save_state(model=GenerativeModelFunctionSchema)
 def generative_model(config: str, mode: str = "sampling", save_logs: bool = False) -> plt.Figure:
     """Generative model.
 
